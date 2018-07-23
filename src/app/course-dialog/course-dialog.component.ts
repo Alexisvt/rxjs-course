@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild } from 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import * as moment from 'moment';
+import { filter } from 'rxjs/operators';
 
 import { Course } from '../model/course';
 
@@ -33,7 +34,9 @@ export class CourseDialogComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.form.valueChanges.pipe(filter(() => this.form.valid)).subscribe(console.log);
+  }
 
   ngAfterViewInit() {}
 
